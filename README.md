@@ -296,7 +296,7 @@ graph TD
     Slice --> |Refactoring Needed| Refactor[Execute & commit refactoring separately]
     Refactor --> |Run existing tests| Slice
     
-    Slice --> |Approved Task List| TDD[5. test-driven-development<br/>Execute TDD loop per slice]
+    Slice --> |Approved Task List| TDD[5. tdd-cycle<br/>Execute TDD loop per slice]
     
     subgraph TDD Loop (Step 5)
         TDD --> Red[RED: Write minimal failing test]
@@ -328,7 +328,7 @@ graph TD
 * **Function:** Decomposes the approved acceptance criteria into independent, small vertical slices (implementing a single behavior end-to-end).
 * **The Separation Rule:** If preparatory refactorings are needed to simplify implementation, they must be planned and executed *separately* using existing tests. They **must never** be part of the final feature PR/commit.
 
-### 5. `overpowered:test-driven-development`
+### 5. `overpowered:tdd-cycle`
 * **Purpose:** TDD execution loop.
 * **Function:** The original monolithic TDD engine. Runs the Red-Green-Refactor loop iteratively for each vertical slice:
   - **RED:** Write one failing test showing the behavior. Verify it fails correctly.

@@ -22,7 +22,7 @@ You MUST complete these steps in order:
    - *Bad (Horizontal):* Splitting by technical layers (e.g., "Step 1: Write database schema", "Step 2: Implement API route", "Step 3: Implement frontend UI").
 3. **Present the Task List** — Present the planned sequence of vertical slices and any preparatory refactoring tasks to your human partner.
 4. **Obtain Explicit Approval** — Align with the user and get approval on the task list.
-5. **Transition** — Once approved, invoke the restored monolithic `overpowered:test-driven-development` skill to execute the tasks via TDD cycles.
+5. **Transition** — Once approved, invoke the restored monolithic `overpowered:tdd-cycle` skill to execute the tasks via TDD cycles.
 
 ## The Separation Rule (from NOTES.md)
 
