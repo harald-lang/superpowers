@@ -1,0 +1,4 @@
+ - produce PRs that are handleable by human beings
+ - small incremental changes
+ - refactorings or design changes that are supposed to simplify the implementation of the feature are acceptable but must never be part of the final PR
+ - 
