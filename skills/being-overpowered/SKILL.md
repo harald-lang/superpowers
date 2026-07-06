@@ -24,40 +24,30 @@ This is not negotiable. You cannot rationalize your way out of this.
 ```mermaid
 graph TD
     Start[Conversation Start] --> UOP[overpowered:being-overpowered]
-    UOP --> Step1[Step 1: overpowered:tdd-brainstorming]
-    Step1 --> Step2[Step 2: overpowered:tdd-red-phase]
-    Step2 --> Step3[Step 3: overpowered:tdd-green-phase]
-    Step3 --> |Next Test in List| Step2
-    Step3 --> |All Tests Green & Complete| Step4[Step 4: overpowered:tdd-refactor-phase]
-    Step4 --> Step5[Step 5: overpowered:tdd-verification]
+    UOP --> Step1[Step 1: overpowered:tdd-requirements]
+    Step1 --> Step2[Step 2: overpowered:tdd-acceptance-criteria]
+    Step2 --> Step3[Step 3: overpowered:tdd-task-slicing]
+    Step3 --> Step4[Step 4: overpowered:test-driven-development]
 ```
 
 Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
 
 ## Skill Sequence Overview
 
-1. **`overpowered:tdd-brainstorming`**
-   - Understand requirements.
-   - Create a structured **Test List** (scenarios, inputs, expected outcomes).
-   - Identify if **preparatory refactorings** are needed to make the change easy. (Note: These must be done and committed separately *before* starting the feature work, and never mixed into the final feature PR).
-   - Get user approval on the Test List.
-2. **`overpowered:tdd-red-phase`**
-   - Pick the next item from the Test List.
-   - Write ONE minimal failing test. No production code changes!
-   - Run the test suite and verify that the test fails in the expected way.
-3. **`overpowered:tdd-green-phase`**
-   - Write the absolute minimal production code to pass the failing test.
-   - Apply TDD strategies: Fake It, Obvious Implementation, or Triangulation.
-   - Run the test suite and verify that the new test and all existing tests pass.
-   - Commit the passing incremental change.
-   - Loop back to `tdd-red-phase` for the next test.
-4. **`overpowered:tdd-refactor-phase`**
-   - Refactor production code and test code separately to improve names, clean up duplication, and decouple components.
-   - Verify tests remain green at every step. Commit refactorings separately.
-5. **`overpowered:tdd-verification`**
-   - Run the full test suite.
-   - Run the Testing Anti-Patterns checklist to make sure no mocks or test-only methods violate TDD principles.
-   - Provide a final walkthrough.
+1. **`overpowered:tdd-requirements`**
+   - Interactively explore project context, requirements, and constraints with the human partner.
+   - Ask clarifying questions one at a time and employ interactive techniques (such as `/grill-me`).
+2. **`overpowered:tdd-acceptance-criteria`**
+   - Interactively define and document concrete acceptance criteria (success criteria, happy paths, error conditions, edge cases).
+   - Get explicit approval from the human partner before proceeding.
+3. **`overpowered:tdd-task-slicing`**
+   - Interactively break down the requirements and criteria into minimal vertical slices (one behavioral capability at a time).
+   - Establish whether preparatory refactorings are needed.
+   - **CRITICAL RULE:** Preparatory refactorings/simplifications must be executed and committed *first* separately using existing tests. They must **never** be part of the final feature implementation PR/commit.
+   - Get human partner approval on the vertical slices list.
+4. **`overpowered:test-driven-development`**
+   - Execute the Red-Green-Refactor loop iteratively for each vertical slice.
+   - Follow the testing anti-patterns guidelines and final verification checks.
 
 ## Red Flags - You are rationalizing!
 
