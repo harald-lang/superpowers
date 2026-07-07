@@ -96,13 +96,28 @@ digraph tdd_cycle {
 
 Before writing any tests, create a **Test List** (e.g., in a scratchpad, comments, or a task file):
 - Write down all the requirements, edge cases, and scenarios you need to cover.
-- Pick exactly **one** test from the list to implement first.
+- **CRITICAL:** Slices derived from task slicing are macro capabilities. You MUST decompose the active macro slice into a micro-test list (e.g., `testValidateThrowsOnNullEmail`, `testValidateThrowsOnEmptyString`) before writing any code.
+- **NO TIME PRESSURE**: There is absolutely no time pressure. Structured, step-by-step progress following TDD has the highest priority to meet the high quality and design requirements. Do not rush to show functional code at the cost of skipping TDD discipline.
+- **TOPOLOGICAL SORTING & DEPENDENCIES**:
+  - Before starting, analyze the micro-test list for dependencies and sort them topologically (independent/fundamental tests first, dependent/complex tests last).
+  - **Backtracking Rule**: If during the green phase you realize the current test cannot be minimally implemented because it depends on behavior that is not yet verified by another test, **stop immediately**. Revert/discard any code changes made for this test, suspend it, and implement the test you are dependent on first.
+- **TEST SPLITTING**: Whenever you pick a test from the test list, verify if it can be split into even smaller, more fine-grained micro-tests. If so, split it immediately and work on the smallest one.
+- Pick exactly **one** test from the micro-test list to implement first.
 - If you think of new edge cases or refactoring ideas *during* the cycle, immediately add them to the list instead of switching focus.
 - Cross off completed tests as you go. This keeps you focused and ensures no edge cases are forgotten.
 
+> [!IMPORTANT]
+> **HARD-GATE: Micro-Test Isolation**
+> Never bundle multiple distinct concepts/scenarios into one test method (avoid Assertion Roulette). Each item on your micro-test list must be executed in its own isolated Red-Green-Refactor loop.
+
 ### RED - Write Failing Test
 
-Write one minimal test showing what should happen.
+Write **exactly one** minimal test showing what should happen. 
+
+> [!IMPORTANT]
+> **CRITICAL RED-PHASE RULES:**
+> 1. **Do NOT write multiple tests at once.** You must follow the complete Red-Green-Refactor cycle for one test before writing the next. Writing multiple tests in bulk is an anti-pattern that leads to designing mock or imaginary behavior.
+> 2. **One logical concept per test.** Avoid "Assertion Roulette" (testing multiple independent behaviors or scenarios with dozens of assertions in a single test). If a test needs to verify different state transitions or independent concepts, split them into separate tests.
 
 <Good>
 ```typescript
@@ -120,7 +135,7 @@ test('retries failed operations 3 times', async () => {
   expect(attempts).toBe(3);
 });
 ```
-Clear name, tests real behavior, one thing
+Clear name, tests real behavior, asserts one logical outcome
 </Good>
 
 <Bad>
@@ -138,8 +153,9 @@ Vague name, tests mock not code
 </Bad>
 
 **Requirements:**
-- One behavior
-- Clear name
+- Exactly one test at a time
+- One logical concept/behavior per test (no stacked unrelated assertions)
+- Clear, descriptive name
 - Real code (no mocks unless unavoidable)
 
 ### Verify RED - Watch It Fail
@@ -149,6 +165,11 @@ Vague name, tests mock not code
 ```bash
 npm test path/to/test.test.ts
 ```
+
+> [!TIP]
+> **Test Runner Performance:**
+> If test runner execution takes too long, reduce the number of executed tests during TDD cycles (e.g., target a specific file, class, or test pattern). Keeping the test feedback loop under 2 seconds is critical to prevent the temptation to batch assertions.
+
 
 Confirm:
 - Test fails (assertion failure, compile error, or ReferenceError due to missing code, not test runner configuration errors)
@@ -223,6 +244,9 @@ Confirm:
 - Test passes
 - Other tests still pass
 - Output pristine (no errors, warnings)
+
+> [!IMPORTANT]
+> **Coverage Rule:** Always measure code coverage for the newly written code in the GREEN phase. If the coverage of the newly inserted code is not 100% (Line and Branch), **reset (delete the uncovered code)** and start over with smaller, more granular tests that force the uncovered code to be written.
 
 **Test fails?** Fix code, not test.
 

@@ -13,6 +13,9 @@ If you think there is even a 1% chance an overpowered TDD skill might apply to w
 IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
 
 This is not negotiable. You cannot rationalize your way out of this.
+
+> [!IMPORTANT]
+> **NO TIME PRESSURE**: There is absolutely no time pressure. Structured, step-by-step progress following TDD has the highest priority to meet the high quality and design requirements. Do not rush to show functional code at the cost of skipping TDD discipline.
 </EXTREMELY-IMPORTANT>
 
 ## The Rule

@@ -113,3 +113,12 @@ Before proposing changes to skill design, workflow philosophy, or architecture, 
 - One problem per PR
 - Test on at least one harness and report results in the environment table
 - Describe the problem you solved, not just what you changed
+
+## Overpowered - TDD Agent Guidelines
+
+- For all feature implementations, bug fixes, or refactoring tasks, you MUST follow the Test-Driven Development (TDD) skills defined in this repository.
+- Start every session and task by invoking the `overpowered:being-overpowered` skill.
+- Do not write any production or test code without first completing the interactive analysis phase (`tdd-requirements` -> `tdd-acceptance-criteria` -> `tdd-task-slicing`).
+- **TDD Priority & Time Pressure**: There is absolutely no time pressure. Structured, step-by-step TDD progress is the highest priority to meet all quality and design requirements.
+- **Dependency Backtracking**: If a test cannot be minimally implemented because it depends on missing unverified behavior, immediately stop, discard changes, and implement the prerequisite test first.
+- **Micro-Test Splitting**: When picking any test, verify if it can be split into smaller, more granular tests, and split them immediately.

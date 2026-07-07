@@ -42,3 +42,12 @@ If you determine that existing code needs design changes to accommodate the new 
 | **Approach** | Build ONE small end-to-end user capability at a time. | Build the database, then the API, then the UI in bulk. |
 | **Feedback** | Fast validation of design, fast feedback from tests. | Long lead time, complex debugging at the end. |
 | **Quality** | Refactor as you go, keep system working. | Speculative models and mocks that don't match reality. |
+
+## The Micro-TDD Rule (Granularity Mismatch Warning)
+
+> [!IMPORTANT]
+> **Macro-Slices vs. Micro-Tests:**
+> A vertical slice defined during task slicing is NOT a single unit test. Slices are macro capabilities. When implementing a vertical slice:
+> 1. Before writing any code, decompose the slice into a list of focused **micro-test cases** (e.g., `testValidateThrowsOnNullEmail`, `testValidateThrowsOnEmptyString`).
+> 2. Each micro-test case must check exactly one logical concept or assertion.
+> 3. Execute the Red-Green-Refactor cycle individually for each micro-test, one by one. Do not write a single test that asserts the entire slice at once.

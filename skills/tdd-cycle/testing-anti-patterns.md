@@ -16,6 +16,8 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 1. NEVER test mock behavior
 2. NEVER add test-only methods to production classes
 3. NEVER mock without understanding dependencies
+4. NEVER write multiple tests at once in a RED phase
+5. NEVER test multiple concepts or behaviors in a single test (avoid Assertion Roulette)
 ```
 
 ## Anti-Pattern 1: Testing Mock Behavior
@@ -248,6 +250,40 @@ TDD cycle:
 4. THEN claim complete
 ```
 
+## Anti-Pattern 6: Writing Multiple Tests at Once
+
+**The violation:**
+Writing 2, 3, or more tests in a single RED phase before making any of them pass.
+
+**Why this is wrong:**
+- It violates the core Red-Green-Refactor loop.
+- It makes it harder to write the minimal implementation.
+- You end up designing too much ahead of time, leading to over-engineered solutions.
+- If several tests fail at once, debugging is more difficult.
+
+**The fix:**
+- Always write exactly ONE test.
+- Run the test suite and watch that single test fail (RED).
+- Write the minimal code to make only that test pass (GREEN).
+- Refactor.
+- Only then proceed to write the next test.
+
+## Anti-Pattern 7: Assertion Roulette (Too Many Assertions / Testing Multiple Concepts in a Single Test)
+
+**The violation:**
+A single test containing many assertions checking multiple independent behaviors or concepts.
+
+**Why this is wrong:**
+- If one of the early assertions fails, the subsequent assertions are never executed. This hides other potential failures.
+- It makes it harder to diagnose what exactly is broken when the test fails.
+- The test name becomes vague (e.g., `testEverything()`) or misleading.
+- It signals that the test is trying to verify multiple behaviors rather than a single, distinct behavior.
+
+**The fix:**
+- Follow the "One Logical Concept per Test" rule.
+- If you find yourself asserting on unrelated properties, split the test into separate, focused test cases.
+- It is acceptable to have multiple assertions if they are all verifying the same single outcome (e.g., verifying that a returned object has correct `id`, `name`, and `email` properties). But do not mix testing of different scenarios or state transitions in the same test.
+
 ## When Mocks Become Too Complex
 
 **Warning signs:**
@@ -280,6 +316,8 @@ TDD cycle:
 | Incomplete mocks | Mirror real API completely |
 | Tests as afterthought | TDD - tests first |
 | Over-complex mocks | Consider integration tests |
+| Writing multiple tests at once | Write exactly one test at a time in the RED phase |
+| Assertion Roulette (too many assertions) | Assert on only one logical concept per test |
 
 ## Red Flags
 
@@ -289,6 +327,8 @@ TDD cycle:
 - Test fails when you remove mock
 - Can't explain why mock is needed
 - Mocking "just to be safe"
+- Writing multiple tests in one RED phase
+- Tests containing dozens of assertions across different scenarios or behaviors
 
 ## The Bottom Line
 
