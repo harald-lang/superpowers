@@ -30,7 +30,8 @@ graph TD
     UOP --> Step1[Step 1: overpowered:tdd-requirements]
     Step1 --> Step2[Step 2: overpowered:tdd-acceptance-criteria]
     Step2 --> Step3[Step 3: overpowered:tdd-task-slicing]
-    Step3 --> Step4[Step 4: overpowered:tdd-cycle]
+    Step3 --> Step4a[Step 4a: overpowered:tdd-cycle<br/>(Inline Execution)]
+    Step3 --> Step4b[Step 4b: overpowered:tdd-agent-dispatch<br/>(Dispatch to Fresh Agents)]
 ```
 
 Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
@@ -48,9 +49,9 @@ Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it h
    - Establish whether preparatory refactorings are needed.
    - **CRITICAL RULE:** Preparatory refactorings/simplifications must be executed and committed *first* separately using existing tests. They must **never** be part of the final feature implementation PR/commit.
    - Get human partner approval on the vertical slices list.
-4. **`overpowered:tdd-cycle`**
-   - Execute the Red-Green-Refactor loop iteratively for each vertical slice.
-   - Follow the testing anti-patterns guidelines and final verification checks.
+4. **Execution Choice**
+   - **`overpowered:tdd-cycle`** (Inline): Execute the Red-Green-Refactor loop iteratively for each vertical slice in the current session.
+   - **`overpowered:tdd-agent-dispatch`** (Dispatch): Generate standalone task briefings to hand off the slices to fresh subagents.
 
 ## Red Flags - You are rationalizing!
 

@@ -296,7 +296,9 @@ graph TD
     Slice --> |Refactoring Needed| Refactor[Execute & commit refactoring separately]
     Refactor --> |Run existing tests| Slice
     
-    Slice --> |Approved Task List| TDD[5. tdd-cycle<br/>Execute TDD loop per slice]
+    Slice --> |Approved Task List| Choice{Execution Choice}
+    Choice --> |Inline| TDD[5. tdd-cycle<br/>Execute TDD loop per slice]
+    Choice --> |Dispatch| Dispatch[5. tdd-agent-dispatch<br/>Generate Subagent Prompts]
     
     subgraph TDD Loop (Step 5)
         TDD --> Red[RED: Write minimal failing test]
@@ -335,6 +337,10 @@ graph TD
   - **GREEN:** Write the minimal code to pass (using Fake It, Obvious Implementation, or Triangulation).
   - **REFACTOR:** Clean up code and test code in separate cycles while keeping tests green.
   - **Verification:** Audits the code against the testing anti-patterns reference document.
+
+### 6. `overpowered:tdd-agent-dispatch`
+* **Purpose:** Agent handoff.
+* **Function:** Generates isolated task briefings (prompts) for fresh subagents. Each prompt encapsulates the global context, relevant acceptance criteria, and a specific vertical slice, instructing the new agent to execute the `tdd-cycle` skill in isolation.
 
 ---
 
