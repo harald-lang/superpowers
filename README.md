@@ -24,7 +24,7 @@ graph TD
     Choice --> |Inline| TDD[5. tdd-cycle<br/>Execute TDD loop per slice]
     Choice --> |Dispatch| Dispatch[5. tdd-agent-dispatch<br/>Generate Subagent Prompts]
     
-    subgraph TDD Loop (Step 5)
+    subgraph TDDLoop [TDD Loop Step 5]
         TDD --> Red[RED: Write minimal failing test]
         Red --> Green[GREEN: Write minimal code to pass]
         Green --> RefactorStep[REFACTOR: Clean code & tests separately]
